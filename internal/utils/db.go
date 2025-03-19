@@ -4,24 +4,40 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"sync"
+
+	"task-api-go/internal/models"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
-// InitDB connects to the PostgreSQL database using environment variables.
+var (
+	db   *gorm.DB
+	once sync.Once
+)
+
 func InitDB() (*gorm.DB, error) {
-	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=5432 sslmode=disable TimeZone=UTC",
-		os.Getenv("DB_HOST"),
-		os.Getenv("DB_USER"),
-		os.Getenv("DB_PASSWORD"),
-		os.Getenv("DB_NAME"))
+	var err error
+	once.Do(func() {
+		dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=5432 sslmode=disable TimeZone=UTC",
+			os.Getenv("DB_HOST"),
+			os.Getenv("DB_USER"),
+			os.Getenv("DB_PASSWORD"),
+			os.Getenv("DB_NAME"))
 
-	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
-	if err != nil {
-		return nil, err
-	}
+		db, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
+		if err != nil {
+			log.Fatal("Failed to connect to the database:", err)
+		}
 
-	log.Println("Successfully connected to DB!")
-	return db, nil
+		err = db.AutoMigrate(&models.User{}, &models.Task{})
+		if err != nil {
+			log.Fatal("Failed to run migrations:", err)
+		}
+
+		log.Println("Successfully connected to DB and ran migrations!")
+	})
+
+	return db, err
 }

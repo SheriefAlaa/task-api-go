@@ -1,8 +1,9 @@
-package main
+package main_test
 
 import (
 	"net/http"
 	"net/http/httptest"
+	"task-api-go/internal/testutils"
 	"testing"
 
 	"github.com/gin-gonic/gin"
@@ -11,16 +12,16 @@ import (
 
 func TestHealth(t *testing.T) {
 	gin.SetMode(gin.TestMode)
+	t.Parallel()
 
-	router := setupRouter()
+	testutils.CascadeDB(t)
 
-	// Create a request to send to the endpoint
-	req, err := http.NewRequest(http.MethodGet, "/api/v1/health", nil)
-	assert.NoError(t, err)
+	r := testutils.SetupTestRouter(testutils.SharedTestDB)
 
 	rr := httptest.NewRecorder()
-
-	router.ServeHTTP(rr, req)
+	req, err := http.NewRequest(http.MethodGet, "/api/v1/health", nil)
+	assert.NoError(t, err)
+	r.ServeHTTP(rr, req)
 
 	assert.Equal(t, http.StatusOK, rr.Code)
 

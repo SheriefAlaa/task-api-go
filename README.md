@@ -1,5 +1,5 @@
 ## Task API Server (in Go)
-This is a practice project in Go that aims to use as many advanced language features as possible. For now, it is a basic tasks API server written in Go. The server is a RESTful API that allows you to create, read, update, and delete tasks.
+This is a practice project in Go that aims to use as many advanced language features as possible.
 
 ## Running via Docker
 ### Development
@@ -20,5 +20,29 @@ docker-compose up --build api-release
 
 ## Running tests
 ```bash
-go test ./cmd/server -v
+go test -v -count=1 ./...
 ```
+
+## Goals
+- [x] Simple CRUD operations for tasks.
+- [ ] Authentication:
+  - [x] Signup
+  - [ ] Login (JWT authentication)
+- [ ] Authorization (**OpenFGA**):
+  - [ ] **Role-based access control**.
+  - [ ] **Attribute-based access control**.
+- [ ] API Swagger documentation.
+- [ ] Unit & Integration tests:
+  - [x] Shared Test DB.
+  - [x] Health check.
+  - [ ] Task service.
+  - [x] Signup.
+  - [ ] Login.
+  - [ ] Authenticated routes.
+  - [ ] Authorization.
+- [ ] Connect the API to a **Flutter web** frontend.
+- [ ] Send **notifications** to the frontend **via SSE** or **WebSockets**.
+- [ ] Deploy to **GCP**.
+
+## Non-Goals
+- [x] Clean architecture.
