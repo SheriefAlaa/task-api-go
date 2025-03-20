@@ -17,3 +17,14 @@ func GetAllUsers(db *gorm.DB) gin.HandlerFunc {
 		c.JSON(http.StatusOK, users)
 	}
 }
+
+func GetUserTasks(db *gorm.DB) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		var tasks []models.Task
+		id := c.Param("id")
+
+		db.Where("assignee_id = ?", id).Find(&tasks)
+
+		c.JSON(http.StatusOK, tasks)
+	}
+}

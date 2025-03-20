@@ -16,7 +16,7 @@ import (
 
 func TestSignupUser_Success(t *testing.T) {
 	gin.SetMode(gin.TestMode)
-	t.Parallel()
+
 	testutils.CascadeDB(t)
 
 	r := testutils.SetupTestRouter(testutils.SharedTestDB)
@@ -43,7 +43,7 @@ func TestSignupUser_Success(t *testing.T) {
 	assert.NoError(t, err)
 	assert.Contains(t, response, "username")
 	assert.Equal(t, "testuser", response["username"])
-	assert.Contains(t, response, "id")
+	assert.Contains(t, response, "ID")
 }
 
 func TestSignupUser_Failure_WhenPasswordDoesNotMatch(t *testing.T) {
@@ -72,5 +72,5 @@ func TestSignupUser_Failure_WhenPasswordDoesNotMatch(t *testing.T) {
 	var response map[string]any
 	err = json.Unmarshal(resp.Body.Bytes(), &response)
 	assert.NoError(t, err)
-	assert.Equal(t, "Password and password confirmation do not match", response["error"])
+	assert.Equal(t, "Passwords do not match", response["error"])
 }

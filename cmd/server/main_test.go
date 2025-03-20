@@ -12,7 +12,6 @@ import (
 
 func TestHealth(t *testing.T) {
 	gin.SetMode(gin.TestMode)
-	t.Parallel()
 
 	testutils.CascadeDB(t)
 

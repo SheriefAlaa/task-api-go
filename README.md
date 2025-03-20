@@ -25,9 +25,9 @@ go test -v -count=1 ./...
 
 ## Goals
 - [x] Simple CRUD operations for tasks.
-- [ ] Authentication:
+- [x] Authentication:
   - [x] Signup
-  - [ ] Login (JWT authentication)
+  - [x] Login (JWT authentication)
 - [ ] Authorization (**OpenFGA**):
   - [ ] **Role-based access control**.
   - [ ] **Attribute-based access control**.
@@ -37,8 +37,8 @@ go test -v -count=1 ./...
   - [x] Health check.
   - [ ] Task service.
   - [x] Signup.
-  - [ ] Login.
-  - [ ] Authenticated routes.
+  - [x] Login.
+  - [x] Authenticated routes.
   - [ ] Authorization.
 - [ ] Connect the API to a **Flutter web** frontend.
 - [ ] Send **notifications** to the frontend **via SSE** or **WebSockets**.
