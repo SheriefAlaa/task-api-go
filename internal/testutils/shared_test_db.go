@@ -51,7 +51,7 @@ func SetupTestDB() {
 			log.Fatalf("Could not connect to docker: %s", err)
 		}
 
-		SharedTestDB.AutoMigrate(&models.User{}, &models.Task{})
+		SharedTestDB.AutoMigrate(&models.User{}, &models.Task{}, &models.Comment{})
 
 		initialized = true
 		log.Println("Shared test database initialized")

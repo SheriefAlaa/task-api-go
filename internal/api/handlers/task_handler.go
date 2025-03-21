@@ -33,7 +33,12 @@ func getTaskByID(db *gorm.DB, c *gin.Context) (models.Task, error) {
 		return task, err
 	}
 
-	db.First(&task, taskID)
+	db.Preload("Comments", func(db *gorm.DB) *gorm.DB {
+		return db.Order("created_at DESC")
+	}).Preload("Comments.User", func(db *gorm.DB) *gorm.DB {
+		return db.Select("id, username")
+	}).First(&task, taskID)
+
 	if task.ID == 0 {
 		return task, err
 	}
@@ -82,7 +87,12 @@ func DeleteTask(db *gorm.DB) gin.HandlerFunc {
 			return
 		}
 
-		db.Delete(&task)
+		result := db.Delete(&task)
+		if result.Error != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": result.Error.Error()})
+			return
+		}
+
 		c.JSON(http.StatusNoContent, nil)
 	}
 }

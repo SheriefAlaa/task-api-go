@@ -40,6 +40,12 @@ func SetupRouter(db *gorm.DB) *gin.Engine {
 			protected.GET("/tasks/:id", handlers.GetTaskByID(db))
 			protected.PUT("/tasks/:id", handlers.UpdateTask(db))
 			protected.DELETE("/tasks/:id", handlers.DeleteTask(db))
+
+			// Comments - new endpoints
+			protected.POST("/comments", handlers.CreateComment(db))
+			protected.GET("/tasks/:id/comments", handlers.GetCommentsByTaskID(db))
+			protected.PUT("/comments/:id", handlers.UpdateComment(db))
+			protected.DELETE("/comments/:id", handlers.DeleteComment(db))
 		}
 	}
 

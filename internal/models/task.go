@@ -20,7 +20,7 @@ func (s TaskStatus) Value() (driver.Value, error) {
 	return string(s), nil
 }
 
-func (s *TaskStatus) Scan(value interface{}) error {
+func (s *TaskStatus) Scan(value any) error {
 	str, ok := value.(string)
 	if !ok {
 		return errors.New("invalid data for TaskStatus")
@@ -40,6 +40,7 @@ type Task struct {
 	Title       string     `json:"title"`
 	Description string     `json:"description"`
 	Status      TaskStatus `json:"status" gorm:"type:string;default:'todo'"`
-	AssigneeID  uint       `json:"assignee_id"`
+	AssigneeID  uint       `json:"assignee_id" gorm:"index"`
 	Assignee    User       `json:"assignee" gorm:"foreignKey:AssigneeID"`
+	Comments    []Comment  `json:"comments" gorm:"foreignKey:TaskID"`
 }

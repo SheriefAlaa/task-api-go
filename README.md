@@ -15,9 +15,6 @@ docker-compose up --build api-debug
 docker-compose up --build api-release
 ```
 
-## API Endpoints
-- GET [/api/v1/health](http://localhost:8080/api/v1/health)
-
 ## Running tests
 ```bash
 go test -v -count=1 ./...
@@ -35,7 +32,7 @@ go test -v -count=1 ./...
 - [ ] Unit & Integration tests:
   - [x] Shared Test DB.
   - [x] Health check.
-  - [ ] Task service.
+  - [x] Task/Comment service.
   - [x] Signup.
   - [x] Login.
   - [x] Authenticated routes.
@@ -45,4 +42,4 @@ go test -v -count=1 ./...
 - [ ] Deploy to **GCP**.
 
 ## Non-Goals
-- [x] Clean architecture.
+- Clean architecture.
