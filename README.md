@@ -39,7 +39,10 @@ go test -v -count=1 ./...
   - [ ] Authorization.
 - [ ] Connect the API to a **Flutter web** frontend.
 - [ ] Send **notifications** to the frontend **via SSE** or **WebSockets**.
-- [ ] Deploy to **GCP**.
+- [x] CI/CD:
+  - [x] **GitHub Actions Tests Runner**.
+  - [x] **Docker**.
+  - [ ] Deploy to **GCP**.
 
 ## Non-Goals
 - Clean architecture.
