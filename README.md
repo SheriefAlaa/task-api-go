@@ -25,9 +25,12 @@ go test -v -count=1 ./...
 - [x] Authentication:
   - [x] Signup
   - [x] Login (JWT authentication)
-- [ ] Authorization (**OpenFGA**):
-  - [ ] **Role-based access control**.
-  - [ ] **Attribute-based access control**.
+- [ ] Authorization (using **OpenFGA**):
+  - [ ] Setup **OpenFGA** server.
+  - [ ] User can only update their tasks.
+  - [ ] User can only delete their tasks.
+  - [ ] User can only update their comments.
+  - [ ] User can only delete their comments.
 - [ ] API Swagger documentation.
 - [ ] Unit & Integration tests:
   - [x] Shared Test DB.
@@ -39,10 +42,8 @@ go test -v -count=1 ./...
   - [ ] Authorization.
 - [ ] Connect the API to a **Flutter web** frontend.
 - [ ] Send **notifications** to the frontend **via SSE** or **WebSockets**.
+- [ ] User can download tasks as a **CSV** file using a **background job**.
 - [x] CI/CD:
   - [x] **GitHub Actions Tests Runner**.
   - [x] **Docker**.
   - [ ] Deploy to **GCP**.
-
-## Non-Goals
-- Clean architecture.
